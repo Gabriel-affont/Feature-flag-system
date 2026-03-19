@@ -1,7 +1,6 @@
 'use client' ;
 import {useQuery, useMutation,useQueryClient} from '@tanstack/react-query';
-import {FeatureFlag} from '@/types/feature-flag';
-
+import { FeatureFlag } from '../.next/types/feature-flag';
 export function useFeatureFlags() {
     return useQuery<FeatureFlag[]>({ 
         queryKey: ['featureFlags'],

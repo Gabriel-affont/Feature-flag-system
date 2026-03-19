@@ -1,8 +1,8 @@
 'use client';
 
 import {useQuery} from '@tanstack/react-query';
-import {isFeatureEnabled} from '@/lib/feature-flags';
-import { FeatureFlagCheckResult } from '@/types/feature-flag';
+import { isFeatureEnabled } from '../lib/feature-flags/server';
+import { FeatureFlagCheckResult } from '../.next/types/feature-flag';
 
 export function useFeatureFlag(key: string, userId?: string) {
   const {

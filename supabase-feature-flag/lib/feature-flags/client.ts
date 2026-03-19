@@ -1,9 +1,8 @@
 import { createClient } from '../supabase/client';
-import { FeatureFlag, FeatureFlagCheckResult } from '../../feature-flag';
+import { FeatureFlag , FeatureFlagCheckResult} from '../../.next/types/feature-flag';
 
-// This cache is just for reducing redundant calls within a very short window
 const cache = new Map<string, { data: FeatureFlag | null; expires: number }>();
-const CACHE_TTL = 5000;
+const CACHE_TTL = 5000; // 5 seconds - short enough to not interfere with React Query invalidation
 
 function getCached(key: string): FeatureFlag | null | undefined {
   const cached = cache.get(key);
