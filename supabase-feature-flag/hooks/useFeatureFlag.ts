@@ -1,8 +1,17 @@
 'use client';
 
-import {useQuery} from '@tanstack/react-query';
-import { isFeatureEnabled } from '../lib/feature-flags/server';
+import { useQuery } from '@tanstack/react-query';
 import { FeatureFlagCheckResult } from '../.next/types/feature-flag';
+
+async function fetchFeatureFlag(key: string, userId?: string): Promise<FeatureFlagCheckResult> {
+  const url = userId
+    ? `/api/feature-flags/${key}/check?userId=${userId}`
+    : `/api/feature-flags/${key}/check`;
+
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('Failed to fetch feature flag');
+  return res.json();
+}
 
 export function useFeatureFlag(key: string, userId?: string) {
   const {
@@ -11,7 +20,7 @@ export function useFeatureFlag(key: string, userId?: string) {
     error,
   } = useQuery<FeatureFlagCheckResult>({
     queryKey: ['featureFlag', key, userId],
-    queryFn: () => isFeatureEnabled(key, userId),
+    queryFn: () => fetchFeatureFlag(key, userId),
     staleTime: 30 * 1000,
     refetchOnWindowFocus: true,
   });

@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { FeatureFlagGate } from '../../components/FeatureFlagGate';
+import { FeatureFlagGate } from '../../../components/FeatureFlagGate';
 
 interface Todo {
     id: string;
@@ -51,8 +51,8 @@ export default function TodosPage() {
                 flagKey="test"
                 fallback={
                     <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6">
-                        <h3 className="font-bold mb-2 text-purple-800">Feature Not Available</h3>
-                        <p className="text-gray-600">Enable the "test" feature flag in the admin dashboard.</p>
+                        <h3 className="font-semibold mb-2">Feature Not Available</h3>
+                        <p>Enable the "test" feature flag in the admin dashboard.</p>
                     </div>
                 }
             >
